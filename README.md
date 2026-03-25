@@ -1,4 +1,3 @@
-# Event-Driven Trading Engine
 
 # Event-Driven Trading Engine
 
