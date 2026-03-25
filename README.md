@@ -1,60 +1,89 @@
-# SMA_Backtesting
-This is a Python back tester for a simple moving average (SMA) crossover trading strategy. The backtested calculates the performance metrics of the strategy and visualizes the results.
+# Event-Driven Trading Engine
 
-## REQUIREMENTS:
-To use this backtest, you need:
-1. A folder named data in the same location as your Python code file.
+# Event-Driven Trading Engine
 
-2. A CSV file named stock.csv is in the data folder. The file should contain at least two columns: timestamp and close. The timestamp column should contain dates in the format yyyy-mm-dd and the close column should contain the closing prices of the stock.
+A Python-based event-driven trading system for simulating strategy execution on financial time-series data.
 
-## INSTALLATION:
-To use this back tester, simply download the SMABacktester.py file and save it in the same location as your Python code file. Then, import the SMABacktester class in your code.<br>
-or <br>
-else clone the repo:
-```
-git clone https://github.com/Prem07a/SMA_Backtesting
-```
-Make a new folder inside in the same location as that of SMA_Backtesting and name it as data
+The system is designed with a modular architecture that mirrors real-world trading pipelines, including components for data ingestion, signal generation, execution simulation, and portfolio management. It processes sequential data streams to emulate real-time system behavior and focuses on correctness, efficiency, and structured design.
 
-Add the stock.csv file to that folder
-### Note:
-You can add any stock data just put it in the data folder and name it stock.csv
-## USAGE
+---
 
-Import the SMABACKTESTER:
-```
-from SMABacktester import SMABacktester
-```
-To use the back tester, create an instance of the SMABacktester class and pass the following parameters:
+## Features
 
-* symbol: the stock symbol to be backtested
-* SMA_S: the short-term moving average window size
-* SMA_L: the long-term moving average window size
-* start: the start date of the backtesting period (format: 'yyyy-mm-dd')
-* end: the end date of the backtesting period (format: 'yyyy-mm-dd')
+- Event-driven processing of financial time-series data  
+- Modular architecture (data, strategy, execution, portfolio, metrics)  
+- Strategy implementations: SMA crossover, RSI  
+- Performance evaluation:
+  - Profit & Loss (PnL)
+  - Returns
+  - Drawdown
+  - Sharpe Ratio  
+- Parameter optimization for strategy tuning  
+- Visualization of strategy and benchmark performance  
+---
 
-## Available Method:
+## 🧠 System Architecture
 
-The SMABacktester class has the following methods:
+The engine follows a simplified version of real-world trading systems:
+The system processes time-series data sequentially to mimic real-world trading environments where decisions are made on streaming data.
 
-    get_data(): retrieves the stock price data from the stock.csv file and calculates the logarithmic returns
-    
-    prepare_data(): calculates the short-term and long-term moving averages
-    
-    set_parameters(SMA_S=None, SMA_L=None): updates the short-term and/or long-term moving average window sizes
-    
-    test_strategy(): backtests the strategy and calculates the performance metrics
-    
-    plot_results(): visualize the stock price, cumulative returns, and cumulative strategy returns
-    
-    optimize_parameters(SMA_S_range, SMA_L_range): find the optimal short-term and long-term moving average window sizes by exhaustively testing all combinations
-    
-## EXAMPLE USAGE:
+Data → Strategy → Signal → Execution → Portfolio → Metrics
 
-```
-backtester = SMABacktester(symbol='SBI', SMA_S=50, SMA_L=200, start='Any', end='Any') *Note- Select date as per the data
+### Components:
+
+- **Data Handler**  
+  Loads historical price data and processes it sequentially  
+
+- **Strategy Module**  
+  Generates trading signals (Buy/Sell) based on indicators  
+
+- **Execution Engine**  
+  Simulates order execution  
+
+- **Portfolio Manager**  
+  Tracks positions, capital, and PnL  
+
+- **Performance Metrics**  
+  Computes returns, drawdown, and Sharpe ratio  
+
+---
+
+## 📊 Data Requirements
+
+CSV file (`stock.csv`) must contain:
+
+- `timestamp` (yyyy-mm-dd)
+- `close` (price)
+
+Example:
+
+timestamp,close  
+2020-01-01,100  
+2020-01-02,102  
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+git clone https://github.com/Rahul-curious/event-driven-trading-engine.git  
+cd event-driven-trading-engine  
+
+---
+
+## ▶️ Usage
+
+```python
+from SMA_Backtesting import SMABacktester
+
+backtester = SMABacktester(
+    symbol='SBI',
+    SMA_S=50,
+    SMA_L=200,
+    start='2020-01-01',
+    end='2023-01-01'
+)
+
 backtester.test_strategy()
 backtester.plot_results()
-```
-
-*    Note: This is only for Educational Purpose.
